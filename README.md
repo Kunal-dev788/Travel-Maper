@@ -100,6 +100,8 @@ fetch("/cities.json")
 
 ## 🎥 Demo
 
+https://github.com/user-attachments/assets/f691abb3-0902-41b3-bbb8-21461bd73a6a
+
 🔗 [Live Demo on Netlify](https://travel-maper.netlify.app)
 
 ---
