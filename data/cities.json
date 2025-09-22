@@ -1,0 +1,88 @@
+{
+  "cities": [
+    {
+      "cityName": "Sehore",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:28:39.176Z",
+      "notes": "Nice One",
+      "position": {
+        "lat": 23.203800798178765,
+        "lng": 77.08488464355469
+      },
+      "id": 5
+    },
+    {
+      "cityName": "Bhopal",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:35:00.000Z",
+      "notes": "Capital of MP",
+      "position": {
+        "lat": 23.259933,
+        "lng": 77.412613
+      },
+      "id": 6
+    },
+    {
+      "cityName": "Indore",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:36:00.000Z",
+      "notes": "Commercial hub",
+      "position": {
+        "lat": 22.719568,
+        "lng": 75.857727
+      },
+      "id": 7
+    },
+    {
+      "cityName": "Ujjain",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:37:00.000Z",
+      "notes": "Mahakal city",
+      "position": {
+        "lat": 23.1765,
+        "lng": 75.7885
+      },
+      "id": 8
+    },
+    {
+      "cityName": "Jabalpur",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:38:00.000Z",
+      "notes": "Marble Rocks",
+      "position": {
+        "lat": 23.1815,
+        "lng": 79.9864
+      },
+      "id": 9
+    },
+    {
+      "cityName": "Faridabad",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-09-22T14:39:31.198Z",
+      "notes": "Must Visit",
+      "position": {
+        "lat": 28.412540218477243,
+        "lng": 77.25517272949219
+      },
+      "id": 10
+    },
+    {
+      "cityName": "Paris",
+      "country": "United States of America (the)",
+      "emoji": "🇺🇸",
+      "date": "2025-09-22T14:40:19.998Z",
+      "notes": "Awesome",
+      "position": {
+        "lat": 36.296311367952875,
+        "lng": -88.30535888671875
+      },
+      "id": 11
+    }
+  ]
+}

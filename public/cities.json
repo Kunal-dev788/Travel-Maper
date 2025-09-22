@@ -1,0 +1,38 @@
+[
+  {
+    "cityName": "Sehore",
+    "country": "India",
+    "emoji": "🇮🇳",
+    "date": "2025-09-22T14:28:39.176Z",
+    "notes": "Nice One",
+    "position": { "lat": 23.203800798178765, "lng": 77.08488464355469 },
+    "id": 5
+  },
+  {
+    "cityName": "Bhopal",
+    "country": "India",
+    "emoji": "🇮🇳",
+    "date": "2025-09-22T14:35:00.000Z",
+    "notes": "Capital of MP",
+    "position": { "lat": 23.259933, "lng": 77.412613 },
+    "id": 6
+  },
+  {
+    "cityName": "Indore",
+    "country": "India",
+    "emoji": "🇮🇳",
+    "date": "2025-09-22T14:36:00.000Z",
+    "notes": "Commercial hub",
+    "position": { "lat": 22.719568, "lng": 75.857727 },
+    "id": 7
+  },
+  {
+    "cityName": "Paris",
+    "country": "United States of America (the)",
+    "emoji": "🇺🇸",
+    "date": "2025-09-22T14:40:19.998Z",
+    "notes": "Awesome",
+    "position": { "lat": 36.296311367952875, "lng": -88.30535888671875 },
+    "id": 11
+  }
+]
