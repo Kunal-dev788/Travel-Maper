@@ -61,8 +61,8 @@ vite.config.ts             # Vite config
 ### 1️⃣ Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/world-wise.git
-cd world-wise
+git clone https://github.com/Kunal-dev788/Travel-Maper.git
+cd Travel-Maper
 ```
 
 ### 2️⃣ Install dependencies
@@ -100,7 +100,7 @@ fetch("/cities.json")
 
 ## 🎥 Demo
 
-🔗 [Live Demo on Netlify](https://your-app-link.netlify.app)
+🔗 [Live Demo on Netlify](https://travel-maper.netlify.app)
 
 ---
 
@@ -108,7 +108,7 @@ fetch("/cities.json")
 
 | Landing Pages | Web Application | 
 | ------------- | --------------- |
-|               |                 |
+| ![Start](/public/screenshots/Landing.png) | ![Quiz](/public/screenshots/Application.png) |                       
 
 ---
 
