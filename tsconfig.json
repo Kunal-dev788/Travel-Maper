@@ -15,6 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["vite/client", "react", "react-dom"]
   },
-  "include": ["src", "vite.config.ts", "**/*.d.ts"],
+  "include": ["src", "**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

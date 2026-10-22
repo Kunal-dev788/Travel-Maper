@@ -30,7 +30,7 @@ type CitiesContextValue = {
   currentCity: Partial<City> | {};
   error: string;
   getCity: (id: number | string) => Promise<void>;
-  createCity: (newCity: Omit<City, "id">) => Promise<void>;
+  createCity: (newCity: Omit<City, "id">) => Promise<boolean>;
   deleteCity: (id: number | string) => Promise<void>;
 };
 
@@ -72,6 +72,7 @@ function reducer(state: CitiesState, action: Action): CitiesState {
         isLoading: false,
         cities: [...state.cities, action.payload],
         currentCity: action.payload,
+        error: "",
       };
 
     case "city/deleted":
@@ -94,6 +95,8 @@ function reducer(state: CitiesState, action: Action): CitiesState {
   }
 }
 
+const STORAGE_KEY = "travel_cities";
+
 function CitiesProvider({ children }: { children: ReactNode }) {
   const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
@@ -105,8 +108,22 @@ function CitiesProvider({ children }: { children: ReactNode }) {
       dispatch({ type: "loading" });
 
       try {
+        const cached = localStorage.getItem(STORAGE_KEY);
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              dispatch({ type: "cities/loaded", payload: parsed });
+              return;
+            }
+          } catch {
+            // invalid json in localstorage, fallback to fetch
+          }
+        }
+
         const res = await fetch(`/cities.json`);
         const data: City[] = await res.json();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         dispatch({ type: "cities/loaded", payload: data });
       } catch {
         dispatch({
@@ -125,13 +142,22 @@ function CitiesProvider({ children }: { children: ReactNode }) {
       if (Number(id) === currentCityId) return;
       dispatch({ type: "loading" });
       try {
-        const match = cities.find((c) => c.id === Number(id));
-        if (match) dispatch({ type: "city/loaded", payload: match });
-        else
+        let cityPool = cities;
+        if (!cityPool.length) {
+          const cached = localStorage.getItem(STORAGE_KEY);
+          if (cached) {
+            cityPool = JSON.parse(cached);
+          }
+        }
+        const match = cityPool.find((c) => c.id === Number(id));
+        if (match) {
+          dispatch({ type: "city/loaded", payload: match });
+        } else {
           dispatch({
             type: "rejected",
             payload: "City not found",
           });
+        }
       } catch {
         dispatch({
           type: "rejected",
@@ -142,22 +168,45 @@ function CitiesProvider({ children }: { children: ReactNode }) {
     [currentCityId, cities]
   );
 
-  async function createCity(newCity: Omit<City, "id">) {
+  async function createCity(newCity: Omit<City, "id">): Promise<boolean> {
     dispatch({ type: "loading" });
     try {
+      // Prevent duplicate entries for the same city name + country or same coordinates
+      const isDuplicate = cities.some(
+        (c) =>
+          (c.cityName.trim().toLowerCase() === newCity.cityName.trim().toLowerCase() &&
+           c.country.trim().toLowerCase() === newCity.country.trim().toLowerCase()) ||
+          (Math.abs(c.position.lat - newCity.position.lat) < 0.01 &&
+           Math.abs(c.position.lng - newCity.position.lng) < 0.01)
+      );
+
+      if (isDuplicate) {
+        dispatch({
+          type: "rejected",
+          payload: `"${newCity.cityName}" is already in your visited list!`,
+        });
+        return false;
+      }
+
       const generated: City = { ...newCity, id: Date.now() } as City;
+      const updated = [...cities, generated];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       dispatch({ type: "city/created", payload: generated });
+      return true;
     } catch {
       dispatch({
         type: "rejected",
         payload: "There was an error creating the city...",
       });
+      return false;
     }
   }
 
   async function deleteCity(id: number | string) {
     dispatch({ type: "loading" });
     try {
+      const updated = cities.filter((city) => city.id !== Number(id));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       dispatch({ type: "city/deleted", payload: id });
     } catch {
       dispatch({

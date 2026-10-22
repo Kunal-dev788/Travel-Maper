@@ -38,6 +38,17 @@
   color: var(--color-dark--0);
 }
 
+.error {
+  color: #ff6b6b;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background-color: rgba(255, 107, 107, 0.15);
+  border: 1px solid #ff6b6b;
+  border-radius: 5px;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+}
+
 :global(.react-datepicker) {
   font-family: inherit;
   font-size: 1.2rem;

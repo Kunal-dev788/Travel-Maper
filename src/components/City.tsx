@@ -4,7 +4,7 @@ import { useCities } from "../contexts/CitiesContext";
 import BackButton from "./BackButton";
 import styles from "./City.module.css";
 import Spinner from "./Spinner";
-import ReactCountryFlag from "react-country-flag";
+import CountryFlag from "./CountryFlag";
 
 const formatDate = (date: string | number | Date | null) =>
   new Intl.DateTimeFormat("en", {
@@ -13,19 +13,6 @@ const formatDate = (date: string | number | Date | null) =>
     year: "numeric",
     weekday: "long",
   }).format(date ? new Date(date) : new Date());
-
-function emojiToCode(emoji: string): string {
-  if (!emoji) return "";
-  const codePoints = Array.from(emoji)
-    .map((char) => char.codePointAt(0) ?? 0)
-    .filter((cp) => cp >= 127462 && cp <= 127487);
-  if (codePoints.length < 2) return "";
-  const code = String.fromCharCode(
-    codePoints[0] - 127397,
-    codePoints[1] - 127397
-  );
-  return code.toUpperCase();
-}
 
 function City() {
   const { id } = useParams();
@@ -39,7 +26,6 @@ function City() {
   );
 
   const { cityName, emoji, date, notes } = (currentCity as any) || {};
-  const code = emojiToCode(emoji);
 
   if (isLoading) return <Spinner />;
 
@@ -49,11 +35,7 @@ function City() {
         <h6>City name</h6>
         <h3>
           <span>
-            {code ? (
-              <ReactCountryFlag countryCode={code} svg aria-label={cityName} />
-            ) : (
-              emoji
-            )}
+            <CountryFlag emoji={emoji} ariaLabel={cityName} />
           </span>{" "}
           {cityName}
         </h3>
